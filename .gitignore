@@ -164,6 +164,7 @@ dist
 
 # IntelliJ based IDEs
 .idea
+.vscode
 
 # Finder (MacOS) folder config
 .DS_Store
@@ -173,3 +174,7 @@ bun.lockb
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# Prisma generated files
+prisma/prisma-generated
+

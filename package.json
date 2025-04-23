@@ -1,24 +1,50 @@
 {
-  "name": "_node_backend_benchmarks",
-  "module": "index.mjs",
-  "type": "module",
+  "name": "node-backend-benchmarks",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "benchmark": "bun benchmark.js",
+    "start:elysia": "cd packages/elysia && bun run start",
+    "start:express": "cd packages/express && pnpm run start",
+    "start:fastify": "cd packages/fastify && pnpm run start",
+    "start:nestjs": "cd packages/nestjs && pnpm run start:prod",
+    "start:nitro": "cd packages/nitro && bun run preview",
+    "install:elysia": "cd packages/elysia && bun install",
+    "install:express": "cd packages/express && pnpm install",
+    "install:fastify": "cd packages/fastify && pnpm install",
+    "install:nestjs": "cd packages/nestjs && pnpm install",
+    "install:nitro": "cd packages/nitro && bun install",
+    "install:all": "concurrently --kill-others-on-fail --kill-others \"bun install\" \"cd packages/elysia && bun install\" \"cd packages/express && pnpm install\" \"cd packages/fastify && pnpm install\" \"cd packages/nestjs && pnpm install\" \"cd packages/nitro && bun install\"",
+    "start:all": "concurrently --kill-others-on-fail --kill-others \"bun run start:elysia\" \"pnpm run start:express\" \"pnpm run start:fastify\" \"pnpm run start:nestjs\" \"bun run start:nitro\"",
+    "kill:all": "pkill -f 'bun run start:elysia' || true && pkill -f 'pnpm run start:express' || true && pkill -f 'pnpm run start:fastify' || true && pkill -f 'pnpm run start:nestjs' || true && pkill -f 'bun run start:nitro' || true",
+    "prisma:generate": "bunx prisma generate",
+    "prisma:push": "bunx prisma db push",
+    "prisma:studio": "bunx prisma studio"
+  },
   "devDependencies": {
     "@types/autocannon": "^7.12.0",
-    "@types/bun": "latest",
+    "@types/bun": "^1.2.10",
     "@types/cli-progress": "^3.11.2",
-    "cli-progress": "^3.11.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "@types/node": "^20.14.6",
+    "cli-progress": "^3.11.2",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@types/node": "^20.14.6",
     "autocannon": "^7.15.0",
     "axios": "^1.7.2",
     "mitata": "^0.1.11",
     "ofetch": "^1.3.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
-  }
+    "@prisma/client": "^5.15.1",
+    "prisma": "^5.15.1"
+  },
+  "trustedDependencies": [
+    "@nestjs/core",
+    "@parcel/watcher",
+    "elysia",
+    "nitro"
+  ]
 }

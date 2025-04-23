@@ -1,0 +1,11 @@
+[install]
+peer = true
+hoisted = true
+production = false
+optional = true
+
+[install.scopes]
+prisma = "inherit"
+
+[workspaces]
+enable = true
